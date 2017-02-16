@@ -140,6 +140,7 @@ class FOSElasticaExtension extends Extension
         foreach ($indexes as $name => $index) {
             $indexId = sprintf('fos_elastica.index.%s', $name);
             $indexName = isset($index['index_name']) ? $index['index_name'] : $name;
+            $indexName = $indexName . (new \DateTime())->format('Ym');
 
             $indexDef = new DefinitionDecorator('fos_elastica.index_prototype');
             $indexDef->setFactory(array(new Reference('fos_elastica.client'), 'getIndex'));
